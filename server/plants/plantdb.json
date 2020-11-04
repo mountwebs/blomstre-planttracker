@@ -1,0 +1,11 @@
+{
+  "plants": [
+     {
+       "id": 1,
+       "name": "Pilea",
+       "wateringInterval": 10,
+       "wateringWindow": 2,
+       "watered": []
+     }
+  ]
+}
