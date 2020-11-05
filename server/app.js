@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
-const plantRouter = require('./plants');
+const plantRouter = require('./plants/routes');
+// var bodyParser = require('body-parser');
 // const bodyParser = require('body-parser');
 // const morgan = require('morgan');
 
-app.use('/plants', plantRouter);
+app.use(express.json());
+
+app.use('/api/plants', plantRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
