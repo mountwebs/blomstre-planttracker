@@ -10,6 +10,7 @@ const createPlantObj = (input) => {
     name: input.name,
     wateringInterval: input.wateringInterval || 0,
     wateringWindow: input.wateringWindow || 1,
+    watered: [],
   };
 };
 
@@ -33,7 +34,6 @@ const getPlants = async () => {
 
 const getPlant = async (id) => {
   const plants = await getPlants();
-  console.log(plants);
   const plant = plants.find((el) => el.id === id);
   return plant;
 };

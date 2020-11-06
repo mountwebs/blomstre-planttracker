@@ -1,0 +1,11 @@
+.header h1 {
+  font-size: 62px;
+  margin: 15px 0 0;
+  color: green;
+  /* -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; */
+}
+
+.header h3 {
+  margin: -10px 0 15px;
+}

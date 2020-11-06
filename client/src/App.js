@@ -1,5 +1,7 @@
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
+import AddPlant from './components/AddPlant/AddPlant';
+import Header from './components/Header/Header';
 import React, { useEffect, useReducer } from 'react';
 
 const apiBaseUrl = 'http://localhost:8000/api/plants/';
@@ -7,7 +9,7 @@ const apiBaseUrl = 'http://localhost:8000/api/plants/';
 const initialState = {
   loading: true,
   error: '',
-  plants: {},
+  plants: [],
 };
 
 const reducer = (state, action) => {
@@ -21,16 +23,20 @@ const reducer = (state, action) => {
     case 'FETCH_ERROR':
       return {
         loading: false,
-        plants: {},
+        plants: [],
         error: 'Error...',
       };
+    case 'NONE':
+      return state;
     default:
       return state;
   }
 };
 
+export const PlantDbContext = React.createContext();
+
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [plantDbState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     fetch(apiBaseUrl)
@@ -41,14 +47,20 @@ function App() {
       .catch((error) => {
         dispatch({ type: 'FETCH_ERROR' });
       });
+    dispatch({ type: 'NONE' });
   }, []);
 
   return (
-    <div className="App">
-      <Dashboard />
-      {state.loading ? 'loading' : JSON.stringify(state.plants)}
-      {state.error ? state.error : null}
-    </div>
+    <PlantDbContext.Provider value={{ plantDbState, dispatch }}>
+      <div className="App">
+        <Header />
+        {plantDbState.loading ? 'loading' : <Dashboard />}
+        {plantDbState.error ? plantDbState.error : null}
+        <div className="bottom">
+          <AddPlant />
+        </div>
+      </div>
+    </PlantDbContext.Provider>
   );
 }
 

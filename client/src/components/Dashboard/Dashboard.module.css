@@ -1,0 +1,43 @@
+.dashboard {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  margin: 20px 5px 25px;
+}
+
+.colorLedger {
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  margin-bottom: 3px;
+  margin: 3px 5px;
+}
+
+.colorBox {
+  border-radius: 5px;
+  height: 10px;
+  width: 10px;
+  margin: 3px 3px 0 8px;
+}
+
+.grey {
+  background-color: grey;
+}
+
+.blue {
+  background-color: dodgerblue;
+}
+
+.green {
+  background-color: green;
+}
+
+.brown {
+  background-color: brown;
+}
+
+.red {
+  background-color: red;
+}

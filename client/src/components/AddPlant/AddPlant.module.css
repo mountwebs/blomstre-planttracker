@@ -1,0 +1,39 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(41, 41, 41);
+  border-radius: 0 0 10px 10px;
+  margin: 20px 10px;
+}
+
+.textContainer {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-left: 12px;
+}
+
+.textContainer p {
+  margin: 0 0 5px;
+}
+
+.addPlant {
+  margin: 0px 10px;
+  max-width: 300px;
+}
+
+.addPlant input {
+  width: 100%;
+  padding: 10px 15px;
+}
+
+.addPlant input[type='submit'] {
+  margin-top: 10px;
+  width: 100px;
+  background-color: rgb(117, 181, 102);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  font-size: medium;
+}
