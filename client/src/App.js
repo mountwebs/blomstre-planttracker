@@ -2,6 +2,7 @@ import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import AddPlant from './components/AddPlant/AddPlant';
 import Header from './components/Header/Header';
+import PlantWall from './components/PlantWall/PlantWall';
 import React, { useEffect, useReducer } from 'react';
 
 const apiBaseUrl = 'http://localhost:8000/api/plants/';
@@ -56,6 +57,9 @@ function App() {
         <Header />
         {plantDbState.loading ? 'loading' : <Dashboard />}
         {plantDbState.error ? plantDbState.error : null}
+        <div className="wall">
+          {plantDbState.loading ? 'loading' : <PlantWall />}
+        </div>
         <div className="bottom">
           <AddPlant />
         </div>
