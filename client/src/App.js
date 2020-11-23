@@ -5,6 +5,9 @@ import Header from './components/Header/Header';
 import PlantWall from './components/PlantWall/PlantWall';
 import React, { useEffect, useReducer } from 'react';
 
+import { connect } from 'react-redux';
+import { login } from './redux/actions/auth';
+
 const apiBaseUrl = 'http://localhost:8000/api/plants/';
 
 const initialState = {
@@ -36,7 +39,9 @@ const reducer = (state, action) => {
 
 export const PlantDbContext = React.createContext();
 
-function App() {
+const App = (props) => {
+  console.log({ props });
+
   const [plantDbState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -66,6 +71,17 @@ function App() {
       </div>
     </PlantDbContext.Provider>
   );
-}
+};
 
-export default App;
+const mapStateToPros = (state) => {
+  console.log('asdbaksbdahksb', state);
+  return {
+    greatState: state.authReducer.something,
+    authState: state.authReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  login: () => dispatch(login()),
+});
+export default connect(mapStateToPros, mapDispatchToProps)(App);
