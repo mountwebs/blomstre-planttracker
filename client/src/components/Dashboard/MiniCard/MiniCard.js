@@ -6,6 +6,9 @@ import Icon from '@mdi/react';
 import { mdiFlower } from '@mdi/js';
 import styles from './MiniCard.module.css';
 
+import { connect } from 'react-redux';
+import { login } from '../../../redux/actions/auth';
+
 const apiBaseUrl = 'http://localhost:8000/api/plants/';
 
 const today = moment();
@@ -21,6 +24,7 @@ const MiniCard = (props) => {
   };
 
   const waterPlant = (id) => {
+    props.login();
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) {
       return;
@@ -83,4 +87,14 @@ const MiniCard = (props) => {
   );
 };
 
-export default MiniCard;
+const mapStateToPros = (state) => {
+  return {
+    greatState: state.authReducer.something,
+    authState: state.authReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  login: () => dispatch(login()),
+});
+export default connect(mapStateToPros, mapDispatchToProps)(MiniCard);
