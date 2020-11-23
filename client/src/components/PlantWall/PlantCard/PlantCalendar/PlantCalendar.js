@@ -11,6 +11,7 @@ const PlantCalendar = () => {
       for (let col = 0, x = padding; col < cols; col++) {
         squares.push(
           <rect
+            key={`${x}_${y}`}
             x={x}
             y={y}
             rx="1"
@@ -25,7 +26,6 @@ const PlantCalendar = () => {
       }
       y += size + padding;
     }
-    console.log(squares);
     return squares;
   };
 

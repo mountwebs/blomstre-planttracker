@@ -8,8 +8,6 @@ const PlantWall = () => {
   const { plantDbState } = useContext(PlantDbContext);
   const [plants] = useState(plantDbState.plants);
 
-  console.log(plants);
-
   const cards = plants.map((plant) => {
     return <PlantCard plant={plant} key={plant.id} />;
   });
