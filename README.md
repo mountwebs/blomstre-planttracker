@@ -9,7 +9,7 @@ Frontend: React
 
 For now the data about each plant is only stored localy in a json file.
 
-Blomstre is a react/express implementation of an earlier project: (ha-plant-tracker)[https://github.com/mountwebs/ha-plant-tracker], a python plant tracker for home assistant.
+Blomstre is a react/express implementation of an earlier project: [ha-plant-tracker](https://github.com/mountwebs/ha-plant-tracker), a python plant tracker for home assistant.
 
 ## How to use
 ### Prerequisites
