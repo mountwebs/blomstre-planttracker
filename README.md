@@ -1,5 +1,5 @@
 # Blomstre
-Blomstre is a prototype for a personal planttracker. It shows you if your plants need water.
+Blomstre is a prototype for a personal planttracker. It shows you if your plants is happy or if it needs water.
 
 It was made on a one day sprint and was a part of the [SALTs](https://salt.study/) bootcamp in Stockholm fall 2020.
 
