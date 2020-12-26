@@ -3,7 +3,7 @@ Blomstre is a prototype for a personal planttracker. It shows you if your plants
 
 It was made on a one day sprint and was a part of the [SALTs](https://salt.study/) bootcamp in Stockholm fall 2020.
 
-<img scr="images/screencapture" alt="Screencapture">
+![](images/screencapture.jpg?raw=true)
 
 ## Details
 Backend: API with Node and express  
