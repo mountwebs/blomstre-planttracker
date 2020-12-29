@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { PlantDbContext } from '../../../App';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import Icon from '@mdi/react';
