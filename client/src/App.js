@@ -4,8 +4,6 @@ import AddPlant from './components/AddPlant/AddPlant';
 import Header from './components/Header/Header';
 import React from 'react';
 
-const apiBaseUrl = 'http://localhost:8000/api/plants/';
-
 function App() {
   return (
     <div className="App">

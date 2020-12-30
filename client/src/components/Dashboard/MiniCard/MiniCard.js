@@ -1,34 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import axios from 'axios';
 import Icon from '@mdi/react';
 import { mdiFlower } from '@mdi/js';
 import styles from './MiniCard.module.css';
 
-const apiBaseUrl = 'http://localhost:8000/api/plants/';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../redux/actions';
+
+// const apiBaseUrl = 'http://localhost:8000/api/plants/';
 
 const today = moment();
 const todayString = moment().format('YYYY-MM-DD');
 
 const MiniCard = (props) => {
-  const [plant, setPlant] = useState(props.plant);
+  const [plant] = useState(props.plantDb[props.index]);
   const [daysSince, setDaysSince] = useState(null);
   const [colorState, setColorState] = useState({ color: 'grey' });
 
-  const postPlantToDataBase = () => {
-    axios.put(`${apiBaseUrl}${plant.id}`, plant);
-  };
+  //const plant =
+
+  // const postPlantToDataBase = () => {
+  //   axios.put(`${apiBaseUrl}${plant.id}`, plant);
+  // };
 
   const waterPlant = (id) => {
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) {
       return;
     }
-    const newPlant = { ...plant, watered: [...plant.watered] };
-    newPlant.watered.push(todayString);
-    setPlant({ ...newPlant });
+    //const newPlant = { ...plant, watered: [...plant.watered] };
+    //newPlant.watered.push(todayString);
+    //setPlant({ ...newPlant });
+
     // setTimeout(postPlantToDataBase, 1000);
-    postPlantToDataBase();
+    props.waterPlant(plant.id, todayString);
+
+    // postPlantToDataBase();
     // console.log(plant);
   };
 
@@ -57,10 +64,6 @@ const MiniCard = (props) => {
   };
 
   useEffect(() => {
-    postPlantToDataBase();
-  }, [plant]);
-
-  useEffect(() => {
     daysSinceWatered();
     setWaterState();
   }, [daysSince, plant]);
@@ -82,4 +85,17 @@ const MiniCard = (props) => {
   );
 };
 
-export default MiniCard;
+const mapStateToProps = (state) => {
+  return {
+    plantDb: state.plants,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    waterPlant: (plantId, date) =>
+      dispatch({ type: actionTypes.WATER_PLANT, plantId, date }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCard);
