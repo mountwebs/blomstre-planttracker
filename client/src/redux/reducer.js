@@ -97,7 +97,7 @@ const reducer = (state = initialState, action) => {
       newPlants[plantIndex].watered.push(action.date);
       return {
         ...state,
-        [state.plants]: newPlants,
+        plants: newPlants,
       };
     default:
       return state;
