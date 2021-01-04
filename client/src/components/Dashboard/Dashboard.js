@@ -5,12 +5,7 @@ import styles from './Dashboard.module.css';
 import { connect } from 'react-redux';
 
 const Dashboard = ({plants}) => {
-  // const [plants] = useState(props.plantDb);
-
-  console.log("dashboard");
-
   const cards = plants.map((plant, i) => {
-    console.log(plant.watered)
     return (
       <MiniCard
         plant={plant}

@@ -18,16 +18,13 @@ const MiniCard = (props) => {
 
   const waterPlant = (id) => {
     const wateredToday = plant.watered.includes(todayString);
-    if (wateredToday) {
-      return;
-    }
+    if (wateredToday) return;
     props.waterPlant(plant.id, todayString);
   };
 
   const daysSinceWatered = () => {
-    if (plant.watered.length === 0) {
-      return;
-    }
+    if (plant.watered.length === 0) return;
+    
     const moments = plant.watered.map((d) => moment(d));
     const maxDate = moment.max(moments);
     const diff = today.diff(maxDate, 'days');
