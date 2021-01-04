@@ -16,7 +16,7 @@ const MiniCard = (props) => {
 
   const plant = props.plant;
 
-  const waterPlant = (id) => {
+  const waterPlant = () => {
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) return;
     props.waterPlant(plant.id, todayString);
@@ -45,12 +45,13 @@ const MiniCard = (props) => {
         setColorState({ color: 'red' });
       }
     };
+
     daysSinceWatered();
     setWaterState();
   }, [daysSince, plant, props.watered]);
 
   return (
-    <div className={styles.card} onClick={(e) => waterPlant(plant.id)}>
+    <div className={styles.card} onClick={(e) => waterPlant()}>
       <p className={styles.daysSince}>{daysSince}</p>
       <Icon
         className={styles.icon}
