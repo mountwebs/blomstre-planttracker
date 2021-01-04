@@ -78,7 +78,8 @@ import { connect } from 'react-redux';
 // ];
 
 const Dashboard = (props) => {
-  const [plants] = useState(props.plantDb);
+  //const [plants] = useState(props.plantDb);
+  const plants = props.plantDb;
 
   const cards = plants.map((plant, i) => {
     return (

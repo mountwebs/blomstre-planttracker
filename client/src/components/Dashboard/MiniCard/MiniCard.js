@@ -7,36 +7,22 @@ import styles from './MiniCard.module.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../redux/actions';
 
-// const apiBaseUrl = 'http://localhost:8000/api/plants/';
-
 const today = moment();
 const todayString = moment().format('YYYY-MM-DD');
 
 const MiniCard = (props) => {
-  const [plant] = useState(props.plantDb[props.index]);
+  const [plant] = useState(props.plant);
   const [daysSince, setDaysSince] = useState(null);
   const [colorState, setColorState] = useState({ color: 'grey' });
 
-  //const plant =
-
-  // const postPlantToDataBase = () => {
-  //   axios.put(`${apiBaseUrl}${plant.id}`, plant);
-  // };
+  console.log("test");
 
   const waterPlant = (id) => {
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) {
       return;
     }
-    //const newPlant = { ...plant, watered: [...plant.watered] };
-    //newPlant.watered.push(todayString);
-    //setPlant({ ...newPlant });
-
-    // setTimeout(postPlantToDataBase, 1000);
     props.waterPlant(plant.id, todayString);
-
-    // postPlantToDataBase();
-    // console.log(plant);
   };
 
   const daysSinceWatered = () => {
@@ -85,12 +71,6 @@ const MiniCard = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    plantDb: state.plants,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     waterPlant: (plantId, date) =>
@@ -98,4 +78,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniCard);
+export default connect(null, mapDispatchToProps)(MiniCard);
