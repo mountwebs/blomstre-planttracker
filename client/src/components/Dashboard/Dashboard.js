@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import MiniCard from './MiniCard/MiniCard';
 import styles from './Dashboard.module.css';
 

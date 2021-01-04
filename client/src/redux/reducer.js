@@ -92,9 +92,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.WATER_PLANT:
-      const newPlants = [...state.plants];
-      const plantIndex = newPlants.findIndex((el) => el.id === action.plantId);
-      newPlants[plantIndex].watered.push(action.date);
+      const plantIndex = state.plants.findIndex((el) => el.id === action.plantId);
+      const newPlants = state.plants.map((item, index) => {
+        if (index !== plantIndex) {
+          return {...item, watered: [...item.watered]}
+        }
+        return {...item, watered: [...item.watered, action.date]}
+      })
+      console.log(newPlants);
       return {
         ...state,
         plants: newPlants,
