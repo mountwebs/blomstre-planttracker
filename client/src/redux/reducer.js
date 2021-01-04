@@ -77,7 +77,7 @@ const initialState = {
       name: 'Kattegress',
       wateringInterval: 6,
       wateringWindow: 2,
-      watered: ['2020-11-06', '2020-12-26'],
+      watered: ['2021-01-04'],
     },
     {
       id: '40834ae5-a359-43d8-9307-c0708c29eea8',

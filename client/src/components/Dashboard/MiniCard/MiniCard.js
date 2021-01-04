@@ -11,11 +11,10 @@ const today = moment();
 const todayString = moment().format('YYYY-MM-DD');
 
 const MiniCard = (props) => {
-  const [plant] = useState(props.plant);
   const [daysSince, setDaysSince] = useState(null);
   const [colorState, setColorState] = useState({ color: 'grey' });
 
-  console.log("test");
+  const plant = props.plant;
 
   const waterPlant = (id) => {
     const wateredToday = plant.watered.includes(todayString);
@@ -52,7 +51,7 @@ const MiniCard = (props) => {
   useEffect(() => {
     daysSinceWatered();
     setWaterState();
-  }, [daysSince, plant]);
+  }, [daysSince, plant, props.watered]);
 
   return (
     <div className={styles.card} onClick={(e) => waterPlant(plant.id)}>
