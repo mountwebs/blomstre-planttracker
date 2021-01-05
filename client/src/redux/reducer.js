@@ -92,6 +92,7 @@ import * as actionTypes from './actionTypes';
 const initialState = {
   plants: [],
   error: false,
+  loading: true
 };
 
 const waterPlant = (state, action) => {
@@ -128,7 +129,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         plants: action.plants,
-        error:false
+        error: false,
+        loading: false
       }
     case actionTypes.FETCH_PLANTS_FAILED:
       return {

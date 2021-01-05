@@ -7,7 +7,7 @@ import * as actions from '../../redux/actions';
 
 
 
-const Dashboard = ({plants, onInitPlants, error}) => {
+const Dashboard = ({plants, onInitPlants, error, loading}) => {
 
   useEffect(() => {
     onInitPlants()
@@ -23,9 +23,16 @@ const Dashboard = ({plants, onInitPlants, error}) => {
     );
   });
 
+  const renderDashboard = () => {
+    if (error) return 'There was an error';
+    if (loading) return 'Loading...';
+    return cards;
+    
+  }
+
   return (
     <>
-      <div className={styles.dashboard}>{cards}</div>
+      <div className={styles.dashboard}>{renderDashboard()}</div>
       <div className={styles.colorLedger}>
         <div className={`${styles.colorBox} ${styles.grey}`}></div>
         <span>Not initialized</span>
@@ -46,6 +53,7 @@ const mapStateToProps = state => {
   return {
     plants: state.plants, 
     error: state.error,
+    loading: state.loading,
   };
 };
 

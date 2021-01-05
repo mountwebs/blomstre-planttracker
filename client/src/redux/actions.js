@@ -21,7 +21,8 @@ export const addPlant = (plant) => {
 export const setPlants = (plants) => {
   return {
     type: actionTypes.SET_PLANTS,
-    plants
+    plants,
+    loading: false,
   }
 }
 
