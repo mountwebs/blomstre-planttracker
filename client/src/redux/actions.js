@@ -3,19 +3,6 @@ import axios from 'axios';
 
 const apiBaseUrl = 'http://localhost:8000/api/plants/';
 
-export const waterPlant = (plantId, date) => {
-  return dispatch => {
-    dispatch({type: actionTypes.WAIT_FOR_DATA})
-    axios.put(`${apiBaseUrl}${plant.id}`, plant).then(response => console.log(response.status))
-  }
-  
-  {
-    type: actionTypes.WATER_PLANT,
-    plantId,
-    date,
-  };
-};
-
 export const addPlant = (plant) => {
   return {
     type: actionTypes.ADD_PLANT,
@@ -48,3 +35,12 @@ export const fetchPlants = () => {
 
   }
 }
+
+export const waterPlant = (plant, date) => {
+  return dispatch => {
+    dispatch({type: actionTypes.WAIT_FOR_DATA})
+    axios.put(`${apiBaseUrl}${plant.id}`, plant)
+      .then(response => console.log(response.status))
+      .then(fetchPlants())
+  }
+};
