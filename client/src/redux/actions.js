@@ -27,6 +27,7 @@ export const fetchPlants = () => {
   return dispatch => {
     axios.get(apiBaseUrl)
       .then(response => {
+        console.log(response.data)
         dispatch(setPlants(response.data))
       })
       .catch(error => {
@@ -37,10 +38,13 @@ export const fetchPlants = () => {
 }
 
 export const waterPlant = (plant, date) => {
+  // console.log(plant);
   return dispatch => {
     dispatch({type: actionTypes.WAIT_FOR_DATA})
     axios.put(`${apiBaseUrl}${plant.id}`, plant)
-      .then(response => console.log(response.status))
-      .then(fetchPlants())
+      .then(response => dispatch(fetchPlants()))
+      .catch(error => {
+        dispatch(fetchPlantsFailed())
+      })
   }
 };

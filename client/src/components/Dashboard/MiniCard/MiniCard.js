@@ -19,7 +19,9 @@ const MiniCard = (props) => {
   const waterPlant = () => {
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) return;
-    props.waterPlant(plant.id, todayString);
+    const newPlant = {...plant}
+    newPlant.watered = [...newPlant.watered, todayString]
+    props.waterPlant(newPlant);
   };
 
   useEffect(() => {
@@ -69,8 +71,8 @@ const MiniCard = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    waterPlant: (plantId, date) =>
-      dispatch(actions.waterPlant(plantId,date)),
+    waterPlant: (plant, date) =>
+      dispatch(actions.waterPlant(plant,date)),
   };
 };
 

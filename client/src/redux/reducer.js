@@ -137,6 +137,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: true 
       }
+    case actionTypes.WAIT_FOR_DATA:
+      return {
+        ...state,
+        loading: true
+      }
     default:
       return state;
   }
