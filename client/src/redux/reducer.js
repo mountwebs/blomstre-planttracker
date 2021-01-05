@@ -89,10 +89,10 @@ import * as actionTypes from './actionTypes';
 //   ],
 // };
 
-// const initialState = {
-//   plants: [],
-//   error: false,
-// };
+const initialState = {
+  plants: [],
+  error: false,
+};
 
 const waterPlant = (state, action) => {
   const plantIndex = state.plants.findIndex((el) => el.id === action.plantId);
@@ -124,6 +124,17 @@ const reducer = (state = initialState, action) => {
       return waterPlant(state, action)
     case actionTypes.ADD_PLANT:
       return addPlant(state, action)
+    case actionTypes.SET_PLANTS:
+      return {
+        ...state,
+        plants: action.plants,
+        error:false
+      }
+    case actionTypes.FETCH_PLANTS_FAILED:
+      return {
+        ...state,
+        error: true 
+      }
     default:
       return state;
   }

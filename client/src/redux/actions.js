@@ -25,16 +25,18 @@ export const setPlants = (plants) => {
   }
 }
 
-export const fetchPlantsFailed = () => {
+export const fetchPlantsFailed = () => { 
   return {
     type: actionTypes.FETCH_PLANTS_FAILED
   }
 }
 
 export const initPlants = () => {
+  console.log("tet ");
   return dispatch => {
     axios.get(apiBaseUrl)
       .then(response => {
+        console.log(response.date)
         dispatch(setPlants(response.data))
       })
       .catch(error => {

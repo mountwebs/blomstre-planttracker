@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MiniCard from './MiniCard/MiniCard';
 import styles from './Dashboard.module.css';
 
 import { connect } from 'react-redux';
+import * as actions from '../../redux/actions';
 
-const Dashboard = ({plants}) => {
-  const cards = plants.map((plant, i) => {
+
+
+const Dashboard = (props) => {
+
+  useEffect(() => {
+    props.onInitPlants()
+  }, [])
+
+  const cards = props.plants.map((plant, i) => {
     return (
       <MiniCard
         plant={plant}
@@ -34,10 +42,16 @@ const Dashboard = ({plants}) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    plants: state.plants,
+    plants: state.plants, 
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitPlants: () => dispatch(actions.initPlants())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
