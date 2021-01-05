@@ -7,13 +7,13 @@ import * as actions from '../../redux/actions';
 
 
 
-const Dashboard = (props) => {
+const Dashboard = ({plants, onInitPlants, error}) => {
 
   useEffect(() => {
-    props.onInitPlants()
-  }, [])
+    onInitPlants()
+  }, [onInitPlants])
 
-  const cards = props.plants.map((plant, i) => {
+  const cards = plants.map((plant, i) => {
     return (
       <MiniCard
         plant={plant}
@@ -45,6 +45,7 @@ const Dashboard = (props) => {
 const mapStateToProps = state => {
   return {
     plants: state.plants, 
+    error: state.error,
   };
 };
 
