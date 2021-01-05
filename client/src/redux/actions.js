@@ -7,3 +7,10 @@ export const waterPlant = (plantId, date) => {
     date,
   };
 };
+
+export const addPlant = (plant) => {
+  return {
+    type: actionTypes.ADD_PLANT,
+    plant,
+  }
+}

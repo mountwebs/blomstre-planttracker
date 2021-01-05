@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import styles from './AddPlant.module.css';
 
-const apiBaseUrl = 'http://localhost:8000/api/plants/';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions';
 
-const AddTodoForm = () => {
+const AddTodoForm = (props) => {
   const [plantName, setPlantName] = useState('');
   const [wateringInterval, setWateringInterval] = useState('');
   const [wateringWindow, setWateringWindow] = useState('');
@@ -25,14 +25,14 @@ const AddTodoForm = () => {
   };
 
   const onSubmit = (e) => {
-    axios.post(`${apiBaseUrl}`, {
-      name: plantName,
-      wateringInterval: Number(wateringInterval),
-      wateringWindow: Number(wateringWindow),
-      watered: [],
-    });
-
-    // handleForm(e, name, waterInterval);
+    e.preventDefault();
+    const newPlant = {
+        name: plantName,
+        wateringInterval: Number(wateringInterval),
+        wateringWindow: Number(wateringWindow),
+        watered: [],
+    }
+    props.addPlant(newPlant)
   };
 
   return (
@@ -68,4 +68,10 @@ const AddTodoForm = () => {
   );
 };
 
-export default AddTodoForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPlant: (plant) => dispatch(actions.addPlant(plant))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddTodoForm)
