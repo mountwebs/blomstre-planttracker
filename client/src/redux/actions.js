@@ -1,8 +1,8 @@
-export const WATER_PLANT = 'WATER_PLANT';
+import * as actionTypes from './actionTypes';
 
 export const waterPlant = (plantId, date) => {
   return {
-    type: WATER_PLANT,
+    type: actionTypes.WATER_PLANT,
     plantId,
     date,
   };

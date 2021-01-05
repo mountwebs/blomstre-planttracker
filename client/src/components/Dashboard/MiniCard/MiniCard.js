@@ -5,7 +5,7 @@ import { mdiFlower } from '@mdi/js';
 import styles from './MiniCard.module.css';
 
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../redux/actions';
+import * as actions from '../../../redux/actions';
 
 const today = moment();
 const todayString = moment().format('YYYY-MM-DD');
@@ -70,7 +70,7 @@ const MiniCard = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     waterPlant: (plantId, date) =>
-      dispatch({ type: actionTypes.WATER_PLANT, plantId, date }),
+      dispatch(actions.waterPlant(plantId,date)),
   };
 };
 
