@@ -1,50 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import Icon from '@mdi/react';
-import { mdiFlower } from '@mdi/js';
-import styles from './MiniCard.module.css';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import Icon from "@mdi/react";
+import { mdiFlower } from "@mdi/js";
+import styles from "./MiniCard.module.css";
 
-import { connect } from 'react-redux';
-import * as actions from '../../../redux/actions';
+import { connect } from "react-redux";
+import * as actions from "../../../redux/actions";
 
 const today = moment();
-const todayString = moment().format('YYYY-MM-DD');
+const todayString = moment().format("YYYY-MM-DD");
 
 const MiniCard = (props) => {
   const [daysSince, setDaysSince] = useState(null);
-  const [colorState, setColorState] = useState({ color: 'grey' });
+  const [colorState, setColorState] = useState({ color: "grey" });
 
   const plant = props.plant;
 
   const waterPlant = () => {
     const wateredToday = plant.watered.includes(todayString);
     if (wateredToday) return;
-    const newPlant = {...plant}
-    newPlant.watered = [...newPlant.watered, todayString]
+    const newPlant = { ...plant };
+    newPlant.watered = [...newPlant.watered, todayString];
     props.waterPlant(newPlant);
   };
 
   useEffect(() => {
     const daysSinceWatered = () => {
       if (plant.watered.length === 0) return;
-  
+
       const moments = plant.watered.map((d) => moment(d));
       const maxDate = moment.max(moments);
-      const diff = today.diff(maxDate, 'days');
+      const diff = today.diff(maxDate, "days");
       setDaysSince(diff);
     };
-  
+
     const setWaterState = () => {
       if (daysSince === null) {
-        setColorState({ color: 'grey' });
+        setColorState({ color: "grey" });
       } else if (daysSince === 0) {
-        setColorState({ color: 'DodgerBlue' });
+        setColorState({ color: "DodgerBlue" });
       } else if (daysSince < plant.wateringInterval) {
-        setColorState({ color: 'green' });
-      } else if (daysSince <= plant.wateringInterval + plant.wateringWindow - 1) {
-        setColorState({ color: 'sienna' });
+        setColorState({ color: "green" });
+      } else if (
+        daysSince <=
+        plant.wateringInterval + plant.wateringWindow - 1
+      ) {
+        setColorState({ color: "sienna" });
       } else {
-        setColorState({ color: 'red' });
+        setColorState({ color: "red" });
       }
     };
 
@@ -71,8 +74,7 @@ const MiniCard = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    waterPlant: (plant, date) =>
-      dispatch(actions.waterPlant(plant,date)),
+    waterPlant: (plant, date) => dispatch(actions.waterPlant(plant, date)),
   };
 };
 

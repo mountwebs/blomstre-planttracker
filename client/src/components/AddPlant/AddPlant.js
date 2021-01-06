@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styles from './AddPlant.module.css';
+import React, { useState } from "react";
+import styles from "./AddPlant.module.css";
 
-import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
+import { connect } from "react-redux";
+import * as actions from "../../redux/actions";
 
 const AddTodoForm = (props) => {
-  const [plantName, setPlantName] = useState('');
-  const [wateringInterval, setWateringInterval] = useState('');
-  const [wateringWindow, setWateringWindow] = useState('');
+  const [plantName, setPlantName] = useState("");
+  const [wateringInterval, setWateringInterval] = useState("");
+  const [wateringWindow, setWateringWindow] = useState("");
 
   const onPlantNameChange = (e) => {
     const { value } = e.target;
@@ -27,12 +27,12 @@ const AddTodoForm = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const newPlant = {
-        name: plantName,
-        wateringInterval: Number(wateringInterval),
-        wateringWindow: Number(wateringWindow),
-        watered: [],
-    }
-    props.addPlant(newPlant)
+      name: plantName,
+      wateringInterval: Number(wateringInterval),
+      wateringWindow: Number(wateringWindow),
+      watered: [],
+    };
+    props.addPlant(newPlant);
   };
 
   return (
@@ -70,8 +70,8 @@ const AddTodoForm = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addPlant: (plant) => dispatch(actions.addPlant(plant))
+    addPlant: (plant) => dispatch(actions.addPlant(plant)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddTodoForm)
+export default connect(null, mapDispatchToProps)(AddTodoForm);

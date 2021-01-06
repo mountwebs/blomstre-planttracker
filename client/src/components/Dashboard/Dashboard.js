@@ -1,34 +1,26 @@
-import React, { useEffect } from 'react';
-import MiniCard from './MiniCard/MiniCard';
-import styles from './Dashboard.module.css';
+import React, { useEffect } from "react";
+import MiniCard from "./MiniCard/MiniCard";
+import styles from "./Dashboard.module.css";
 
-import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
+import { connect } from "react-redux";
+import * as actions from "../../redux/actions";
 
-
-
-const Dashboard = ({plants, onInitPlants, error, loading}) => {
-
+const Dashboard = ({ plants, onInitPlants, error, loading }) => {
   useEffect(() => {
-    onInitPlants()
-  }, [onInitPlants])
+    onInitPlants();
+  }, [onInitPlants]);
 
   const cards = plants.map((plant, i) => {
     return (
-      <MiniCard
-        plant={plant}
-        watered={[...plant.watered]}
-        key={plant.id}
-      />
+      <MiniCard plant={plant} watered={[...plant.watered]} key={plant.id} />
     );
   });
 
   const renderDashboard = () => {
-    if (error) return 'There was an error';
-    if (loading) return 'Loading...';
+    if (error) return "There was an error";
+    if (loading) return "Loading...";
     return cards;
-    
-  }
+  };
 
   return (
     <>
@@ -49,18 +41,18 @@ const Dashboard = ({plants, onInitPlants, error, loading}) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    plants: state.plants, 
+    plants: state.plants,
     error: state.error,
     loading: state.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onInitPlants: () => dispatch(actions.fetchPlants())
-  }
-}
+    onInitPlants: () => dispatch(actions.fetchPlants()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
