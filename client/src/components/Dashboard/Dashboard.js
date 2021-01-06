@@ -18,7 +18,6 @@ const Dashboard = ({ plants, onInitPlants, error, loading }) => {
 
   const renderDashboard = () => {
     if (error) return "There was an error";
-    if (loading) return "Loading...";
     return cards;
   };
 
@@ -45,7 +44,6 @@ const mapStateToProps = (state) => {
   return {
     plants: state.plants,
     error: state.error,
-    loading: state.loading,
   };
 };
 
