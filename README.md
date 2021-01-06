@@ -7,7 +7,7 @@ It was made on a one day sprint and was a part of the [SALTs](https://salt.study
 
 ## Details
 Backend: API with Node and express  
-Frontend: React
+Frontend: React and Redux
 
 For now the data about each plant is only stored localy in a json file.
 
