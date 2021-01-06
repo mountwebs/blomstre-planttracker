@@ -1,73 +1,62 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { PlantDbContext } from '../../../App';
-import moment from 'moment';
-import axios from 'axios';
-import Icon from '@mdi/react';
-import { mdiFlower } from '@mdi/js';
-import styles from './MiniCard.module.css';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import Icon from "@mdi/react";
+import { mdiFlower } from "@mdi/js";
+import styles from "./MiniCard.module.css";
 
-const apiBaseUrl = 'http://localhost:8000/api/plants/';
+import { connect } from "react-redux";
+import * as actions from "../../../redux/actions";
 
 const today = moment();
-const todayString = moment().format('YYYY-MM-DD');
+const todayString = moment().format("YYYY-MM-DD");
 
 const MiniCard = (props) => {
-  const [plant, setPlant] = useState(props.plant);
   const [daysSince, setDaysSince] = useState(null);
-  const [colorState, setColorState] = useState({ color: 'grey' });
+  const [colorState, setColorState] = useState({ color: "grey" });
 
-  const postPlantToDataBase = () => {
-    axios.put(`${apiBaseUrl}${plant.id}`, plant);
-  };
+  const plant = props.plant;
 
-  const waterPlant = (id) => {
+  const waterPlant = () => {
     const wateredToday = plant.watered.includes(todayString);
-    if (wateredToday) {
-      return;
-    }
-    const newPlant = { ...plant, watered: [...plant.watered] };
-    newPlant.watered.push(todayString);
-    setPlant({ ...newPlant });
-    // setTimeout(postPlantToDataBase, 1000);
-    postPlantToDataBase();
-    // console.log(plant);
-  };
-
-  const daysSinceWatered = () => {
-    if (plant.watered.length === 0) {
-      return;
-    }
-    const moments = plant.watered.map((d) => moment(d));
-    const maxDate = moment.max(moments);
-    const diff = today.diff(maxDate, 'days');
-    setDaysSince(diff);
-  };
-
-  const setWaterState = () => {
-    if (daysSince === null) {
-      setColorState({ color: 'grey' });
-    } else if (daysSince === 0) {
-      setColorState({ color: 'DodgerBlue' });
-    } else if (daysSince < plant.wateringInterval) {
-      setColorState({ color: 'green' });
-    } else if (daysSince <= plant.wateringInterval + plant.wateringWindow - 1) {
-      setColorState({ color: 'sienna' });
-    } else {
-      setColorState({ color: 'red' });
-    }
+    if (wateredToday) return;
+    const newPlant = { ...plant };
+    newPlant.watered = [...newPlant.watered, todayString];
+    props.waterPlant(newPlant);
   };
 
   useEffect(() => {
-    postPlantToDataBase();
-  }, [plant]);
+    const daysSinceWatered = () => {
+      if (plant.watered.length === 0) return;
 
-  useEffect(() => {
+      const moments = plant.watered.map((d) => moment(d));
+      const maxDate = moment.max(moments);
+      const diff = today.diff(maxDate, "days");
+      setDaysSince(diff);
+    };
+
+    const setWaterState = () => {
+      if (daysSince === null) {
+        setColorState({ color: "grey" });
+      } else if (daysSince === 0) {
+        setColorState({ color: "DodgerBlue" });
+      } else if (daysSince < plant.wateringInterval) {
+        setColorState({ color: "green" });
+      } else if (
+        daysSince <=
+        plant.wateringInterval + plant.wateringWindow - 1
+      ) {
+        setColorState({ color: "sienna" });
+      } else {
+        setColorState({ color: "red" });
+      }
+    };
+
     daysSinceWatered();
     setWaterState();
-  }, [daysSince, plant]);
+  }, [daysSince, plant, props.watered]);
 
   return (
-    <div className={styles.card} onClick={(e) => waterPlant(plant.id)}>
+    <div className={styles.card} onClick={(e) => waterPlant()}>
       <p className={styles.daysSince}>{daysSince}</p>
       <Icon
         className={styles.icon}
@@ -83,4 +72,10 @@ const MiniCard = (props) => {
   );
 };
 
-export default MiniCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    waterPlant: (plant, date) => dispatch(actions.waterPlant(plant, date)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(MiniCard);
