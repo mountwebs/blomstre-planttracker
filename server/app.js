@@ -4,8 +4,13 @@ const plantRouter = require("./plants/routes");
 const cors = require("cors");
 const morgan = require("morgan");
 
-app.use(morgan("tiny"));
+const mongoose = require("mongoose");
+mongoose.connect(
+  ,
+  { useUnifiedTopology: true, useNewUrlParser: true }
+);
 
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
 
