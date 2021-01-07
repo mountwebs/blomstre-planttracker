@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const plantRouter = require("./plants/routes");
@@ -5,10 +6,10 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const mongoose = require("mongoose");
-mongoose.connect(
-  ,
-  { useUnifiedTopology: true, useNewUrlParser: true }
-);
+mongoose.connect(process.env.DB_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 
 app.use(morgan("tiny"));
 app.use(express.json());
