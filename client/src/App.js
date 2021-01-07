@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 const override = css`
   display: block;
   margin: 0 auto;
-  border-color: red;
 `;
 
 function App({ loading }) {
