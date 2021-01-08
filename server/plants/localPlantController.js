@@ -2,8 +2,6 @@ const fs = require("fs").promises;
 const dbPath = `${__dirname}/plantdb.json`;
 const { v4: uuidv4 } = require("uuid");
 
-// Helper functions
-
 const createPlantObj = (input) => {
   return {
     id: uuidv4(),
@@ -22,10 +20,6 @@ const getDb = async () => {
 const writeToDb = async (newDb) => {
   await fs.writeFile(dbPath, JSON.stringify(newDb));
 };
-
-// const findPlant = (id, plants) => plants.find((plant) => plant.id === id);
-
-// Exported functions
 
 const getPlants = async () => {
   const db = await getDb();
