@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js --ignore plants/plantdb.json"
+    "start": "DB=mongo nodemon app.js --ignore plants/plantdb.json",
+    "start-local": "nodemon app.js --ignore plants/plantdb.json"
   },
   "keywords": [],
   "author": "",

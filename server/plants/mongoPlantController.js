@@ -7,12 +7,11 @@ const getPlants = async () => {
 };
 
 const getPlant = async (id) => {
-  const plant = await PlantModel.findById(id);
+  const plant = await PlantModel.findById();
   return plant;
 };
 
 const addPlant = async (plant) => {
-  plant.id = uuidv4();
   const res = await PlantModel.create(plant);
   return res;
 };

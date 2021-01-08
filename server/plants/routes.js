@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const plantController = require("./mongoPlantController");
+const plantController =
+  process.env.DB === "mongo"
+    ? require("./mongoPlantController")
+    : require("./localPlantController");
 const routeBasePath = "/api/plants/";
 const { errorHandler } = require("../utils/errorHandler");
 
@@ -36,14 +39,12 @@ const updatePlant = async (req, res, next) => {
   return res.status(404).end("");
 };
 
-router.get("/", errorHandler(getPlants));
+router.route("/").get(errorHandler(getPlants)).post(errorHandler(addPlant));
 
-router.get("/:id", errorHandler(getPlant));
-
-router.post("/", errorHandler(addPlant));
-
-router.delete("/:id", errorHandler(deletePlant));
-
-router.put("/:id", errorHandler(updatePlant));
+router
+  .route("/:id")
+  .get(errorHandler(getPlant))
+  .put(errorHandler(updatePlant))
+  .delete(errorHandler(deletePlant));
 
 module.exports = router;
