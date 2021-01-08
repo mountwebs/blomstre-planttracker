@@ -10,4 +10,4 @@ const plantModelSchema = new Schema({
   watered: [String],
 });
 
-const PlantModel = mongoose.model("PlantModel", plantModelSchema);
+module.exports = mongoose.model("Plants", plantModelSchema);
