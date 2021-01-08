@@ -27,6 +27,7 @@ const deletePlant = async (req, res, next) => {
 };
 
 const updatePlant = async (req, res, next) => {
+  console.log("test");
   const updated = await plantController.updatePlant(req.params.id, req.body);
   if (updated) {
     res.location(`${routeBasePath}${req.params.id}`);

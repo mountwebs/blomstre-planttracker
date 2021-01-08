@@ -1,4 +1,5 @@
 const PlantModel = require("./plantModel");
+const { v4: uuidv4 } = require("uuid");
 
 const getPlants = async () => {
   const plants = await PlantModel.find();
@@ -11,6 +12,7 @@ const getPlant = async (id) => {
 };
 
 const addPlant = async (plant) => {
+  plant.id = uuidv4();
   const res = await PlantModel.create(plant);
   return res;
 };
@@ -21,6 +23,7 @@ const deletePlant = async (id) => {
 };
 
 const updatePlant = async (id, input) => {
+  console.log("id");
   const res = await PlantModel.findByIdAndUpdate(id, input);
   return input;
 };

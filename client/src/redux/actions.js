@@ -33,7 +33,13 @@ export const waterPlant = (plant, date) => {
   return (dispatch) => {
     dispatch({ type: actionTypes.WAIT_FOR_DATA });
     axios
-      .put(`${apiBaseUrl}${plant.id}`, plant)
+      .put(
+        `${apiBaseUrl}${
+          plant._id
+          //process.env.REACT_APP_DB === "mongo" ? plant._id : plant.id
+        }`,
+        plant
+      )
       .then(() => dispatch(fetchPlants()))
       .catch((error) => {
         dispatch(fetchPlantsFailed());
