@@ -24,7 +24,9 @@ const deletePlant = async (id) => {
 
 const updatePlant = async (id, input) => {
   console.log("id");
-  const res = await PlantModel.findByIdAndUpdate(id, input);
+  const res = await PlantModel.findByIdAndUpdate(id, input, {
+    useFindAndModify: false,
+  });
   return input;
 };
 

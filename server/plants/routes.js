@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const plantController = require("./mongoPlantController");
 const routeBasePath = "/api/plants/";
+const { errorHandler } = require("../utils/errorHandler");
 
 const getPlants = async (req, res, next) => {
   const plants = await plantController.getPlants();
@@ -27,7 +28,6 @@ const deletePlant = async (req, res, next) => {
 };
 
 const updatePlant = async (req, res, next) => {
-  console.log("test");
   const updated = await plantController.updatePlant(req.params.id, req.body);
   if (updated) {
     res.location(`${routeBasePath}${req.params.id}`);
@@ -36,14 +36,14 @@ const updatePlant = async (req, res, next) => {
   return res.status(404).end("");
 };
 
-router.get("/", getPlants);
+router.get("/", errorHandler(getPlants));
 
-router.get("/:id", getPlant);
+router.get("/:id", errorHandler(getPlant));
 
-router.post("/", addPlant);
+router.post("/", errorHandler(addPlant));
 
-router.delete("/:id", deletePlant);
+router.delete("/:id", errorHandler(deletePlant));
 
-router.put("/:id", updatePlant);
+router.put("/:id", errorHandler(updatePlant));
 
 module.exports = router;
