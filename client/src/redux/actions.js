@@ -35,8 +35,7 @@ export const waterPlant = (plant, date) => {
     axios
       .put(
         `${apiBaseUrl}${
-          plant._id
-          //process.env.REACT_APP_DB === "mongo" ? plant._id : plant.id
+          process.env.REACT_APP_DB === "mongo" ? plant._id : plant.id
         }`,
         plant
       )
