@@ -1,6 +1,6 @@
-const fs = require('fs').promises;
+const fs = require("fs").promises;
 const dbPath = `${__dirname}/plantdb.json`;
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 // Helper functions
 
