@@ -20,7 +20,7 @@ Node and npm
 1. Clone this repository.
 2. Install dependencies inside the client and server folders with "npm i".
 
-## A) Run locally with a json file as db
+### A) Run locally with a json file as db
 1. Run "npm run start-local" inside both the server and client folders.
 
 ### Or B) Run with mongoDB
