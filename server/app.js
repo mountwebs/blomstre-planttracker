@@ -5,11 +5,13 @@ const plantRouter = require("./plants/routes");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const mongoose = require("mongoose");
-mongoose.connect(process.env.DB_URI, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+if (process.env.DB === "mongo") {
+  const mongoose = require("mongoose");
+  mongoose.connect(process.env.DB_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
+}
 
 app.use(morgan("tiny"));
 app.use(express.json());
