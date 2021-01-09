@@ -6,10 +6,10 @@ It was made on a one day sprint and was a part of the [SALTs](https://salt.study
 ![](images/screencapture.jpg?raw=true)
 
 ## Details
-Backend: API with Node and express  
+Backend: API with Node, Express and Mongoose. 
 Frontend: React and Redux
 
-For now the data about each plant is only stored localy in a json file.
+The data can either be stored in a mongoDB-database or locally in a json file.
 
 Blomstre is a react/express implementation of an earlier project: [ha-plant-tracker](https://github.com/mountwebs/ha-plant-tracker), a python plant tracker for home assistant.
 
